@@ -1,5 +1,4 @@
 import express, { json } from 'express'
-import mongoose from 'mongoose'
 import { connectToMongo } from './db/db.js'
 import { bookRouter } from './routes/books.js'
 
