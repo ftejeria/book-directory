@@ -12,13 +12,9 @@ app.use(json())
 app.use('/books', bookRouter)
 
 app.use('/', (req, res) => {
-    res.status(404).send("Url not Found")
+  res.status(404).send('Url not Found')
 })
 
 app.listen(PORT, () => {
-    console.log(`server listening on port ${PORT}`)
+  console.log(`server listening on port ${PORT}`)
 })
-
-
-
-
