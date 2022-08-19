@@ -23,15 +23,30 @@ router.post('/add-book', (req, res) => {
   res.send(book)
 })
 
-router.put('', (req, res) => {})
+router.put('/update-book', async (req, res) => {
+  const author = req.body.author
+  const description = req.body.description
+
+  if (!author && !description) {
+    return res.status(400).send('Specify author or description to update')
+  }
+
+  const bookId = req.query.bookId
+  if (mongoose.Types.ObjectId.isValid(bookId)) {
+    const book = await Book.findByIdAndUpdate(bookId, { author, description }, { returnDocument: 'after' })
+    return res.send(book)
+  } else {
+    return res.send('Invalid book id')
+  }
+})
 
 router.delete('/remove-book', async (req, res) => {
   const bookId = req.query.bookId
   if (mongoose.Types.ObjectId.isValid(bookId)) {
     const book = await Book.findByIdAndDelete(bookId)
-    return book ? res.send(`Book with id ${bookId} deleted`) : res.send('Book not found')
+    return book ? res.send(`Book with id ${bookId} deleted`) : res.status(404).send('Book not found')
   } else {
-    return res.send('Invalid book id')
+    return res.status(400).send('Invalid book id')
   }
 })
 
