@@ -1,23 +1,15 @@
 import express from 'express'
 import { addBook, getBooks, removeBook, updateBook } from '../controller/bookController.js'
+import { addBookValidatorSchema, updateBookValidatorSchema } from '../validations/book.validations.js'
 
 const router = express.Router()
 
-router.get('/get-books', async (req, res) => {
-  getBooks(req, res)
-})
+router.get('/get-books', getBooks)
 
-router.post('/add-book', (req, res) => {
-  const book = addBook(req, res)
-  return res.send(book)
-})
+router.post('/add-book', addBookValidatorSchema, addBook)
 
-router.put('/update-book', async (req, res) => {
-  updateBook(req, res)
-})
+router.put('/update-book', updateBookValidatorSchema, updateBook)
 
-router.delete('/remove-book', async (req, res) => {
-  removeBook(req, res)
-})
+router.delete('/remove-book', updateBookValidatorSchema, removeBook)
 
 export { router as bookRouter }

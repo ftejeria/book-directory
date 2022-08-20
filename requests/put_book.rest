@@ -1,0 +1,8 @@
+PUT http://localhost:3000/books/update-book?bookId=630149298c4f0414f5c8bda6
+content-type: application/json
+
+{
+
+    "author":"Author name updated",
+    "description": "Book description updated"
+}
