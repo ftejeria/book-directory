@@ -34,7 +34,8 @@ router.put('/update-book', async (req, res) => {
   const bookId = req.query.bookId
   if (mongoose.Types.ObjectId.isValid(bookId)) {
     const book = await Book.findByIdAndUpdate(bookId, { author, description }, { returnDocument: 'after' })
-    return res.send(book)
+
+    return book ? res.send(book) : res.status(404).send('Book not found')
   } else {
     return res.send('Invalid book id')
   }

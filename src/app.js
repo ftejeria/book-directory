@@ -1,9 +1,9 @@
 import express, { json } from 'express'
 import { connectToMongo } from './db/db.js'
 import { bookRouter } from './routes/books.js'
+import 'dotenv/config'
 
 const app = express()
-const PORT = 3000
 
 connectToMongo()
 
@@ -15,6 +15,6 @@ app.use('/', (req, res) => {
   res.status(404).send('Url not Found')
 })
 
-app.listen(PORT, () => {
-  console.log(`server listening on port ${PORT}`)
+app.listen(process.env.PORT, () => {
+  console.log(`Server on port ${process.env.PORT}`)
 })
