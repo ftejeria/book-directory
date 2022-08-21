@@ -2,7 +2,7 @@ import { Book } from '../models/Book.js'
 import mongoose from 'mongoose'
 import { validationResult } from 'express-validator'
 
-export const addBook = (req, res) => {
+export const addBook = async (req, res) => {
   const error = validationResult(req)
 
   if (!error.isEmpty()) {
@@ -15,7 +15,7 @@ export const addBook = (req, res) => {
   const { name, author, description } = req.body
   const book = new Book({ name, author, description })
 
-  book.save()
+  await book.save()
   return res.send({
     success: true,
     book

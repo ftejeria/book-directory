@@ -15,6 +15,8 @@ app.use('/', (req, res) => {
   res.status(404).send('Url not Found')
 })
 
-app.listen(process.env.PORT, () => {
+const server = app.listen(process.env.PORT, () => {
   console.log(`Server on port ${process.env.PORT}`)
 })
+
+export { app, server }
